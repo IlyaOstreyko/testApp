@@ -75,11 +75,23 @@
                      Visibility="{Binding VisibilityPass, Converter={StaticResource BoolToVisibilityConverter}}"
                      Margin="10,5,10,5"/>
             <Button Content="OK" 
+                    IsDefault="False"
                     Style="{StaticResource crud_button_template}"
                     Margin="10,5,10,5"
                     Padding="1" 
                     Visibility="{Binding VisibilityPass, Converter={StaticResource BoolToVisibilityConverter}}"
                     Command="{Binding AdminPassCommand}"  />
+            <Label  
+                   Margin="10,0,10,5"
+                   Content=" ver 1.1 (01/03/2024) "  
+                   Visibility="{Binding VisibilityPass, Converter={StaticResource BoolToVisibilityConverter}}"
+                   HorizontalAlignment="Center" 
+                VerticalAlignment="Center"
+                VerticalContentAlignment="Center"
+                HorizontalContentAlignment="Center"
+                   Background="White" 
+                   Opacity="0.5" 
+                   FontWeight="Bold"/>
         </StackPanel>
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
 

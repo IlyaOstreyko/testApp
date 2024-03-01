@@ -15,7 +15,7 @@ namespace testApp.Repositories
 {
     public class QuestionRepository : IQuestionRepository<TestQuestion>
     {
-        private readonly ApplicationContext _applicationContext;
+        private ApplicationContext _applicationContext;
         private readonly IMapper _mapper;
 
         public QuestionRepository()
@@ -96,6 +96,7 @@ namespace testApp.Repositories
 
         public List<TestQuestion> GetQuestionsInTheme(string nameTheme)
         {
+            _applicationContext = new ApplicationContext();
             List<TestQuestionDataModel> questionsDM = _applicationContext.TestQuestionDataModels.Where(u => u.NameTheme == nameTheme).ToList();
 
             List<TestQuestion> testQuestions = new List<TestQuestion>();
@@ -105,7 +106,7 @@ namespace testApp.Repositories
                 return testQuestions;
             }
             testQuestions = _mapper.Map<IEnumerable<TestQuestion>>(questionsDM).ToList();
-
+            //_applicationContext.Dispose();
             return testQuestions;
         }
 

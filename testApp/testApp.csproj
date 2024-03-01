@@ -298,8 +298,14 @@
     <Compile Include="Forms\EditQuestions.xaml.cs">
       <DependentUpon>EditQuestions.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Forms\NewTheme.xaml.cs">
+      <DependentUpon>NewTheme.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Resaults.xaml.cs">
       <DependentUpon>Resaults.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Sample.xaml.cs">
+      <DependentUpon>Sample.xaml</DependentUpon>
     </Compile>
     <Compile Include="Forms\User.xaml.cs">
       <DependentUpon>User.xaml</DependentUpon>
@@ -324,7 +330,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Forms\NewTheme.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Forms\Resaults.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\Sample.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

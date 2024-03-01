@@ -18,6 +18,7 @@ using Microsoft.VisualBasic;
 using Xceed.Wpf.AvalonDock.Themes;
 using static System.Net.Mime.MediaTypeNames;
 using testApp.Forms;
+using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
 namespace testApp.ViewModels
 {
@@ -28,7 +29,9 @@ namespace testApp.ViewModels
         public ICommand SaveEditQuestionCommand { get; }
         public ICommand AddImageCommand { get; }
         public ICommand AddQuestionFromFileCommand { get; }
+        public ICommand FileCommand { get; }
         public ICommand CloseWindowsCommand { get; }
+        public ICommand AddNewThemeCommand { get; }
         public ImageSource Image { get; private set; }
         public FileInfo FileInf;
         public string Title { get; set; }
@@ -38,7 +41,18 @@ namespace testApp.ViewModels
         
         public bool VisibilityAdd { get; set; }
         public string ImagePath { get; set; }
-        public List<string> Themes { get; set; }
+        private System.Collections.ObjectModel.ObservableCollection<string> themes;
+        public System.Collections.ObjectModel.ObservableCollection<string> Themes
+        {
+            get { return themes; }
+            set
+            {
+                themes = value;
+                // add appropriate event raising pattern
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("Themes"));
+            }
+        }
         public string SelectionTheme { get; set; }
 
         private TestQuestion testQuestion;
@@ -61,12 +75,17 @@ namespace testApp.ViewModels
             VisibilityEdit = false;
             VisibilityAdd = true;
             //CloseWindowsCommand = new RelayCommand(CloseWindows);
+            AddNewThemeCommand = new RelayCommand(AddNewTheme);
             SaveQuestionCommand = new RelayCommand(SaveQuestion);
             AddImageCommand = new RelayCommand(AddImage);
             AddQuestionFromFileCommand = new RelayCommand(AddQuestionFromFile);
+            FileCommand = new RelayCommand(SampleFile);
             TestQuestion = new TestQuestion();
             db = new QuestionRepository();
-            Themes = db.GetThemes().ToList();
+            var ThemesList = db.GetThemes();
+            Themes = new System.Collections.ObjectModel.ObservableCollection<string>();
+            foreach (var item in ThemesList)
+                Themes.Add(item);
         }
 
         public AddQuestionViewModel(TestQuestion questionEdit)
@@ -77,10 +96,14 @@ namespace testApp.ViewModels
             //CloseWindowsCommand = new RelayCommand(CloseWindows);
             SaveQuestionCommand = new RelayCommand(SaveQuestion);
             AddImageCommand = new RelayCommand(AddImage);
+            AddNewThemeCommand = new RelayCommand(AddNewTheme);
             AddQuestionFromFileCommand = new RelayCommand(AddQuestionFromFile);
             TestQuestion = questionEdit;
             db = new QuestionRepository();
-            Themes = db.GetThemes().ToList();
+            var ThemesList = db.GetThemes();
+            Themes = new System.Collections.ObjectModel.ObservableCollection<string>();
+            foreach (var item in ThemesList)
+                Themes.Add(item);
             SelectionTheme = TestQuestion.NameTheme;
             if (TestQuestion.ImageQuestion  != null)
             {
@@ -141,6 +164,27 @@ namespace testApp.ViewModels
             }
         }
 
+        private void SampleFile(object obj)
+        { 
+            Sample sample = new Sample();
+            sample.ShowDialog();
+        }
+
+
+            private void AddNewTheme(object obj)
+        {
+            NewTheme newTheme = new NewTheme();
+            if (newTheme.ShowDialog() == true)
+            {
+                if (newTheme.TextNewTheme != "" && newTheme.TextNewTheme != null)
+                {
+                    Themes.Add(newTheme.TextNewTheme);
+                    RaisePropertyChanged("Themes");
+                }
+            }
+        }
+
+
         private void AddImage(object obj)
         {
             openFileDialog = new OpenFileDialog()
@@ -153,7 +197,10 @@ namespace testApp.ViewModels
                 ImagePath = openFileDialog.FileName;
                 RaisePropertyChanged("ImagePath");
                 FileInf = new FileInfo(openFileDialog.FileName);
-                ImageEdit = true;
+                if (VisibilityEdit)
+                {
+                    ImageEdit = true;
+                }                    
                 TitleImageButton = " Изменить картинку ";
                 RaisePropertyChanged("TitleImageButton");
                 //using (var stream = new FileStream(openFileDialog.FileName, FileMode.Open))
@@ -203,30 +250,41 @@ namespace testApp.ViewModels
                         //db.Update(newQuestion);
                         if (ImageEdit)
                         {
-                            //string currentDir = Directory.GetCurrentDirectory();
+                            string currentDir = Directory.GetCurrentDirectory();
                             //string dirName = @"Images\" + TestQuestion.NameTheme;
-                            string nameThemeForImage;
-                            if (TestQuestion.NameTheme.Count() > 200)
+                            //string nameThemeForImage;
+                            //if (TestQuestion.NameTheme.Count() > 200)
+                            //{
+                            //    nameThemeForImage = TestQuestion.NameTheme.Substring(0, 200);
+                            //}
+                            //else
+                            //{
+                            //    nameThemeForImage = TestQuestion.NameTheme;
+                            //}
+                            string dirName = "";
+                            if (TestQuestion.ImageQuestion[0] == 'I')
                             {
-                                nameThemeForImage = TestQuestion.NameTheme.Substring(0, 200);
+                                dirName = @"1Images\";
                             }
                             else
                             {
-                                nameThemeForImage = TestQuestion.NameTheme;
+                                dirName = @"Images\";
                             }
-                            //string dirName = @"Images\" + nameThemeForImage;
+                            
                             // если папка не существует
-                            //if (!Directory.Exists(dirName))
-                            //{
-                                //Directory.CreateDirectory(dirName);
-                            //}
+                            if (!Directory.Exists(dirName))
+                            {
+                                Directory.CreateDirectory(dirName);
+                            }
                             string fileType = FileInf.Extension;
-                            //string newPath = dirName + TestQuestion.QuestionId + fileType;
-                            string newPath = TestQuestion.QuestionId + fileType;
-                            //newQuestion.ImageQuestion = newPath;
+                            string newPath = dirName + TestQuestion.QuestionId + fileType;
+                            string fullNewPath = currentDir + "\\" + newPath;
+                            File.Delete(fullNewPath);
                             TestQuestion.ImageQuestion = newPath;
+                            TestQuestion.FullImageQuestion = fullNewPath;
                             if (FileInf.Exists)
                             {
+                                //File.Delete(newPath);
                                 FileInf.CopyTo(newPath, true);
                             }
                         }
@@ -239,21 +297,22 @@ namespace testApp.ViewModels
                         
                         //db.Create(newQuestion);
                         db.Create(TestQuestion);
-                        int idQuestion = (int)db.GetIdQuestions(TestQuestion);
+                        
                         if (FileInf != null)
                         {
-                            string nameThemeForImage;
-                            if (TestQuestion.NameTheme.Count() > 200)
-                            {
-                                nameThemeForImage = TestQuestion.NameTheme.Substring(0, 200);
-                            }
-                            else
-                            {
-                                nameThemeForImage = TestQuestion.NameTheme;
-                            }
+                            int idQuestion = (int)db.GetIdQuestions(TestQuestion);
+                            //string nameThemeForImage;
+                            //if (TestQuestion.NameTheme.Count() > 200)
+                            //{
+                            //    nameThemeForImage = TestQuestion.NameTheme.Substring(0, 200);
+                            //}
+                            //else
+                            //{
+                            //    nameThemeForImage = TestQuestion.NameTheme;
+                            //}
                             //string currentDir = Directory.GetCurrentDirectory();
                             //string dirName = @"Images\" + TestQuestion.NameTheme;
-                            string dirName = @"Images\" + nameThemeForImage;
+                            string dirName = @"Images\";
                             // если папка не существует
                             if (!Directory.Exists(dirName))
                             {
@@ -268,8 +327,9 @@ namespace testApp.ViewModels
                             {
                                 FileInf.CopyTo(newPath, true);
                             }
+                            db.Update(TestQuestion);
                         }
-                        db.Create(TestQuestion);
+                        
                         MessageBox.Show("Вопрос успешно добавлен.", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                     
@@ -465,7 +525,7 @@ namespace testApp.ViewModels
                 }
                 catch
                 {
-                    MessageBox.Show("Картинка не найдена." + "\r\n" + image, "Ошибка копирования картинки", MessageBoxButton.OK, MessageBoxImage.Error);
+                    //MessageBox.Show("Картинка не найдена." + "\r\n" + image, "Ошибка копирования картинки", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
 
 

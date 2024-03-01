@@ -32,7 +32,7 @@ namespace testApp.ViewModels
             CloseWindowsCommand = new RelayCommand(CloseWindows);
             ShowQuestionsCommand = new RelayCommand(ShowQuestions);
             db = new QuestionRepository();
-
+            
             var Themes = db.GetThemes().ToList();
             TableThemes = new List<TableTheme>(Themes.Count());
             for (int i = 0; i < Themes.Count(); i++)
