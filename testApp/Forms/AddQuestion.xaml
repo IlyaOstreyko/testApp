@@ -27,7 +27,8 @@
                     </Grid.RowDefinitions>
                     <TextBlock Text="{TemplateBinding Title}" 
                                Opacity="0.5" 
-                               FontSize="22" 
+                               FontSize="30"
+                               Margin="8"
                                FontWeight="Bold" 
                                HorizontalAlignment="Center" 
                                Background="White"/>
@@ -42,17 +43,7 @@
     </Window.Template>
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
-        <Style TargetType="TextBlock">
-            <Setter Property="Margin" Value="8"/>
-        </Style>
-        <Style TargetType="TextBox">
-            <Setter Property="Margin" Value="8"/>
-        </Style>
-        <Style TargetType="Button">
-            <Setter Property="MinWidth" Value="60"/>
-            <Setter Property="Margin" Value="8"/>
-        </Style>
-        
+
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -67,7 +58,7 @@
             <RowDefinition Height ="1*"/>
             <RowDefinition Height ="1*"/>
             <RowDefinition Height ="1*"/>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" />
@@ -82,49 +73,58 @@
             Opacity="0.9" 
             Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0" Grid.RowSpan="11"/>
         <Label x:Name="Name_QuestionLabel"         
-               Content="Вопрос"   
+               Content="Вопрос:" 
+               FontSize="15"
                Margin="10,0,0,0"
-               HorizontalAlignment="Left" 
+               HorizontalAlignment="Center" 
                VerticalAlignment="Center"
                Grid.Column="1" Grid.Row="0"/>
         <Label x:Name="Name_SpecialityLabel"    Margin="10,0,0,0"   
-               Content="Специальность"  
-               HorizontalAlignment="Left" 
+               Content="Специальность:"
+               FontSize="15"
+               HorizontalAlignment="Center" 
                VerticalAlignment="Center" 
                Grid.Column="1" Grid.Row="1"/>
         <Label x:Name="Name_Article"         Margin="10,0,0,0"     
-               Content="Пояснение"     
-               HorizontalAlignment="Left" 
+               Content="Пояснение:"     
+               FontSize="15"
+               HorizontalAlignment="Center" 
                VerticalAlignment="Center"
                Grid.Column="1" Grid.Row="3"/>
         <Label x:Name="Name_ThemeLabel"       Margin="10,0,0,0" 
-               Content="Тема"       
-               HorizontalAlignment="Left"
+               Content="Тема:"      
+               FontSize="15"
+               HorizontalAlignment="Center"
                VerticalAlignment="Center"
                Grid.Column="1" Grid.Row="2"/>
         <Label x:Name="Name_AnswerCorrect1Label" Margin="10,0,0,0"
-               Content="Правильный"    
-               HorizontalAlignment="Left"
+               Content="Правильный ответ:" 
+               FontSize="15"
+               HorizontalAlignment="Center"
                VerticalAlignment="Center"
                Grid.Column="1" Grid.Row="4"/>
         <Label x:Name="Name_AnswerIncorrect1Label" Margin="10,0,0,0"
-               Content="Неправильный"  
-               HorizontalAlignment="Left"
+               Content="Неправильный ответ:" 
+               FontSize="15"
+               HorizontalAlignment="Center"
                VerticalAlignment="Center"
                Grid.Column="1" Grid.Row="5"/>
         <Label x:Name="Name_AnswerIncorrect2Label" Margin="10,0,0,0"
-               Content="Неправильный" 
-               HorizontalAlignment="Left" 
+               Content="Неправильный ответ:" 
+               FontSize="15"
+               HorizontalAlignment="Center" 
                VerticalAlignment="Center"
                Grid.Column="1" Grid.Row="6"/>
         <Label x:Name="Name_AnswerIncorrect3Label" Margin="10,0,0,0"
-               Content="Неправильный" 
-               HorizontalAlignment="Left"
+               Content="Неправильный ответ:" 
+               FontSize="15"
+               HorizontalAlignment="Center"
                VerticalAlignment="Center"
                Grid.Column="1" Grid.Row="7"/>
         <Label x:Name="Name_image"          Margin="10,0,0,0"
-               Content="Картинка"  
-               HorizontalAlignment="Left"
+               Content="Картинка:"  
+               FontSize="15"
+               HorizontalAlignment="Center"
                VerticalAlignment="Center" 
                Grid.Column="1"               Grid.Row="8"/>
         <Image Source="{Binding ImagePath}" Margin="0,0,0,7"
@@ -146,7 +146,7 @@
             Grid.Column="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
-                <ColumnDefinition Width="170"/>
+                <ColumnDefinition Width="190"/>
             </Grid.ColumnDefinitions>
             <ComboBox
                 Grid.Column="0"
@@ -239,6 +239,7 @@
             <Button IsCancel="True"
                     IsDefault="False"
                 Style="{StaticResource close_button_template}" 
+                    Margin ="10"
                     Content=" Отмена " 
                     HorizontalAlignment="Right"/>
         </StackPanel>

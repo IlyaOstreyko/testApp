@@ -27,7 +27,8 @@
                     </Grid.RowDefinitions>
                     <TextBlock Text="{TemplateBinding Title}" 
                                Opacity="0.5" 
-                               FontSize="22" 
+                               FontSize="30" 
+                               Margin="8"
                                FontWeight="Bold" 
                                HorizontalAlignment="Center" 
                                Background="White"/>
@@ -42,21 +43,11 @@
     </Window.Template>
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
-        <Style TargetType="TextBlock">
-            <Setter Property="Margin" Value="8"/>
-        </Style>
-        <Style TargetType="TextBox">
-            <Setter Property="Margin" Value="8"/>
-        </Style>
-        <Style TargetType="Button">
-            <Setter Property="MinWidth" Value="60"/>
-            <Setter Property="Margin" Value="8"/>
-        </Style>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="6*"/>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" />

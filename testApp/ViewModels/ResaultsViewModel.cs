@@ -3,6 +3,7 @@ using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,7 +36,8 @@ namespace testApp.ViewModels
         private void Save(object obj)
         {
             Application1 app = new Application1();
-            Document doc = app.Documents.Open(@"C:\Users\ilya\source\repos\testApp\testApp\DOC.docx");
+            string currentDir = Directory.GetCurrentDirectory();
+            Document doc = app.Documents.Open(currentDir + @"\DOC.doc");
             var dateAndTime = DateTime.Now;
             var date = dateAndTime.Date;
 

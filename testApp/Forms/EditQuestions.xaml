@@ -11,10 +11,6 @@
         WindowState ="Maximized"
         Title="{Binding Title}" Height="900" Width="850">
     <Window.Resources>
-        <Style TargetType="Button">
-            <Setter Property="MinWidth" Value="60" />
-            <Setter Property="Margin" Value="15" />
-        </Style>
         <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
     </Window.Resources>
     <Window.Template>
@@ -33,7 +29,8 @@
                     </Grid.RowDefinitions>
                     <TextBlock Text="{TemplateBinding Title}" 
                                Opacity="0.5" 
-                               FontSize="22" 
+                               FontSize="30" 
+                               Margin="8"
                                FontWeight="Bold" 
                                HorizontalAlignment="Center" 
                                Background="White"/>
@@ -48,10 +45,10 @@
     </Window.Template>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1.2*"/>
+            <RowDefinition Height="1.5*"/>
             <RowDefinition Height="0.05*" />
             <RowDefinition Height="5.5*" />
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
@@ -86,26 +83,72 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="25"/>
                 <RowDefinition/>
-                <RowDefinition  Height="30"/>
+                <RowDefinition  Height="25"/>
             </Grid.RowDefinitions>
 
             <TextBlock 
                 Grid.Row="0"
+                HorizontalAlignment="Center"
+                FontSize="15"
                 Margin="10,5,10,0"
                 Text="Выберите тему"/>
-            <ComboBox 
+            <!--<ComboBox 
                 Grid.Row="1"
                 ItemsSource="{Binding Path=Themes}"
                 SelectedValue="{Binding Path=SelectionTheme}"
                 IsEditable="False"
-                Margin="10,0,10,0"/>
-            <Button IsDefault="True" Command="{Binding ShowQuestionsCommand}" 
+                Margin="10,0,10,0"/>-->
+            <ScrollViewer 
+            Grid.Column="1" 
+            Grid.Row="1" 
+            Margin="0,0,-10,0">
+                <ListBox x:Name="_Themes" 
+                     Grid.Row="1" 
+                         HorizontalAlignment="Stretch"
+                         HorizontalContentAlignment="Stretch"
+                     ItemsSource="{Binding Themes}" 
+                     Background="{x:Null}"
+                     ScrollViewer.VerticalScrollBarVisibility="Auto"
+                     BorderBrush="{x:Null}" Margin="0,0,0,0">
+                <ListBox.Template>
+                    <ControlTemplate>
+                        <DockPanel LastChildFill="True">
+                            <ItemsPresenter></ItemsPresenter>
+                        </DockPanel>
+                    </ControlTemplate>
+                </ListBox.Template>
+                <ListBox.ItemTemplate >
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="auto">
+                                <Border HorizontalAlignment="Center">
+                                    <Button IsDefault="False" 
+                                    
+                                Command="{Binding DataContext.EditCommand,RelativeSource={RelativeSource AncestorType=Window, AncestorLevel=1}}"                                
+                                CommandParameter="{Binding}"
+                                Style="{StaticResource crud_button_template}"                                
+                                HorizontalAlignment="Stretch"
+                                Content="{Binding}"/>
+                                    </Border>
+                                    <!--<CheckBox IsChecked="{Binding Tag}"/>-->
+                            <!--<RadioButton 
+                Grid.Row="1"
+                GroupName="GroundUpper" 
+                HorizontalAlignment="Center"
+                IsChecked="{Binding SelectionTheme,                                                                           Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                IsEnabled="{Binding IsGroundUpperRadioButtonEnabled}" />-->
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            </ScrollViewer>
+
+            <!--<Button IsDefault="True" Command="{Binding ShowQuestionsCommand}" 
                     Grid.Row="2" 
                     Margin="10,5,10,5"
                     Style="{StaticResource crud_button_template}"
                     Width="150" 
                     Height="20"
-                    Content=" Показать вопросы "/>
+                    Content=" Показать вопросы "/>-->
         </Grid>
 
         <ScrollViewer 

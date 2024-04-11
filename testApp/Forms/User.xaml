@@ -29,7 +29,8 @@
                     </Grid.RowDefinitions>
                     <TextBlock Text="{TemplateBinding Title}" 
                                Opacity="0.5" 
-                               FontSize="22" 
+                               FontSize="30" 
+                               Margin="8"
                                FontWeight="Bold" 
                                HorizontalAlignment="Center" 
                                Background="White"/>
@@ -43,7 +44,7 @@
         </ControlTemplate>
     </Window.Template>
     <Window.Resources>
-        <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -59,7 +60,7 @@
             <RowDefinition Height="0.6*"/>
             <RowDefinition Height="0.7*"/>
             <RowDefinition Height="0.6*"/>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
@@ -352,11 +353,15 @@
         <Button IsDefault="True" Command="{Binding Start}" 
                 Style="{StaticResource crud_button_template}"
                 Width="150" 
-                Height="20" 
+                Height="30" 
                 Grid.Row="12"
                 HorizontalAlignment="Center"
-                Grid.ColumnSpan="5"
-                >Начать тест</Button>
+                Grid.ColumnSpan="5">
+            <TextBlock Text=" Начать тест " 
+                           TextAlignment="Center" 
+                       FontSize="15"
+                           VerticalAlignment="Stretch"/>
+        </Button>
 
     </Grid>
 </Window>

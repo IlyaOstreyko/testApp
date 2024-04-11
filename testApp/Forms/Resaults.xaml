@@ -11,10 +11,6 @@
         WindowState ="Maximized"
         Title=" Результаты тестирования " Height="900" Width="800">
     <Window.Resources>
-        <Style TargetType="Button">
-            <Setter Property="MinWidth" Value="60" />
-            <Setter Property="Margin" Value="15" />
-        </Style>
         <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
     </Window.Resources>
     <Window.Template>
@@ -33,7 +29,8 @@
                     </Grid.RowDefinitions>
                     <TextBlock Text="{TemplateBinding Title}" 
                                Opacity="0.5" 
-                               FontSize="22" 
+                               FontSize="30" 
+                               Margin="8"
                                FontWeight="Bold" 
                                HorizontalAlignment="Center" 
                                Background="White"/>
@@ -51,7 +48,7 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="0.01*" />
             <RowDefinition Height="1*" />
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>

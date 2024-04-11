@@ -28,7 +28,8 @@
                     </Grid.RowDefinitions>
                     <TextBlock Text="{TemplateBinding Title}" 
                                Opacity="0.5" 
-                               FontSize="22" 
+                               Margin="8"
+                               FontSize="30" 
                                FontWeight="Bold" 
                                HorizontalAlignment="Center" 
                                Background="White"/>
@@ -41,6 +42,7 @@
             </Border>
         </ControlTemplate>
     </Window.Template>
+    
     <Grid ShowGridLines="False">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
@@ -58,7 +60,7 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
@@ -90,6 +92,7 @@
                     Grid.Column="1"
                     Grid.Row="4">
             <Label Content="Название специальности: " 
+                   FontSize="15"
                    Visibility="{Binding VisibilityNameSpeciality, Converter={StaticResource BoolToVisibilityConverter}}"/>
             <TextBlock Text="{Binding TestQuestion.NameSpeciality}" TextWrapping="Wrap"/>
         </StackPanel>
@@ -99,7 +102,7 @@
                     VerticalAlignment="Top" 
                     Grid.Column="1"
                     Grid.Row="5">
-            <Label Content="Название темы: " />
+            <Label Content="Название темы: " FontSize="15" />
             <TextBlock Text="{Binding TestQuestion.NameTheme}" TextWrapping="Wrap"/>
         </StackPanel>
 
@@ -109,7 +112,7 @@
                     Grid.Column="1"
                     Grid.Row="6" 
                     Grid.RowSpan="3">
-            <Label Content="Вопрос: " />
+            <Label Content="Вопрос: " FontSize="15" />
             <TextBlock Text="{Binding TestQuestion.NameQuestion}" TextWrapping="Wrap"/>
         </StackPanel>
 
@@ -143,6 +146,7 @@
 
         <GroupBox Header="Выберите ответ" 
                   Grid.Row="9" 
+                  FontSize="15"
                   Grid.Column="1"
                   Grid.RowSpan="5">
             <StackPanel>

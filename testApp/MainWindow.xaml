@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:testApp"
         mc:Ignorable="d"
         Title=" Тестирование сотрудников " 
-        Height="350" 
-        Width="700"
+        Height="450" 
+        Width="850"
         WindowStyle="None"     
         AllowsTransparency="True" 
         WindowStartupLocation="CenterScreen">
@@ -27,7 +27,7 @@
                     </Grid.RowDefinitions>
                     <TextBlock Text="{TemplateBinding Title}" 
                                Opacity="0.5" 
-                               FontSize="22" 
+                               FontSize="30" 
                                FontWeight="Bold" 
                                HorizontalAlignment="Center" 
                                Background="White"/>
@@ -56,14 +56,18 @@
         <StackPanel Grid.Row="0" 
                     Orientation="Vertical"  
                     HorizontalAlignment="Right">
-            <Button Content=" Администрирование " 
-                    Margin="10,10,10,20" 
+            <Button 
+                    Margin="10,10,10,20"
                     Padding="10,10,10,10" 
                     Command="{Binding AdminCommand}" 
                     Style="{StaticResource crud_button_template}">
+                <TextBlock Text=" Администрирование " 
+                           TextAlignment="Center" 
+                           VerticalAlignment="Center"/>
             </Button>
             <Label x:Name="Name_AnswerIncorrect3Label" 
                    Margin="10,5,10,5"
+                   FontSize="14"
                    Content=" Введите пароль: "  
                    Visibility="{Binding VisibilityPass, Converter={StaticResource BoolToVisibilityConverter}}"
                    HorizontalAlignment="Stretch" 
@@ -74,13 +78,18 @@
                      Text="{Binding Pass}" 
                      Visibility="{Binding VisibilityPass, Converter={StaticResource BoolToVisibilityConverter}}"
                      Margin="10,5,10,5"/>
-            <Button Content="OK" 
+            <Button 
+                    Padding="0"
+                    HorizontalContentAlignment="Left"
                     IsDefault="False"
                     Style="{StaticResource crud_button_template}"
                     Margin="10,5,10,5"
-                    Padding="1" 
                     Visibility="{Binding VisibilityPass, Converter={StaticResource BoolToVisibilityConverter}}"
-                    Command="{Binding AdminPassCommand}"  />
+                    Command="{Binding AdminPassCommand}"  >
+                <TextBlock Text="OK"
+                           TextAlignment="Center" 
+                           VerticalAlignment="Center"/>
+                </Button>
             <Label  
                    Margin="10,0,10,5"
                    Content=" ver 1.1 (01/03/2024) "  
@@ -95,11 +104,15 @@
         </StackPanel>
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
 
-            <Button Content=" Добавить "
+            <Button
                     Margin ="10"  
                     Style="{StaticResource crud_button_template}"
                     Command="{Binding AddCommand}" 
-                    Visibility="{Binding Visibility, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                    Visibility="{Binding Visibility, Converter={StaticResource BoolToVisibilityConverter}}">
+                <TextBlock Text=" Добавить "
+                           TextAlignment="Justify" 
+                           VerticalAlignment="Stretch"/>
+            </Button>
             <Button Content=" Редактировать вопросы "
                     Margin ="10"  
                     Style="{StaticResource crud_button_template}"
@@ -109,15 +122,22 @@
                     Margin ="10"  
                     Style="{StaticResource crud_button_template}"
                     Command="{Binding ShowAllQuestionsCommand}"/>
-            <Button Content=" Выбрать тему и начать тест " 
+            <Button
                     Style="{StaticResource crud_button_template}"
                     Margin ="10"  
-                    Command="{Binding Start}"  />
-            <Button Content=" Закрыть "
+                    Command="{Binding Start}">
+                <TextBlock Text=" Выбрать тему и начать тест "
+                           TextAlignment="Justify" 
+                           VerticalAlignment="Stretch"/>
+            </Button>
+            <Button 
                     Style="{StaticResource close_button_template}"
                     Command="{Binding CloseWindowsCommand}"
-                    Margin ="10"
-                    HorizontalAlignment="Right"/>
+                    Margin ="10">
+                <TextBlock Text=" Закрыть "
+                           TextAlignment="Justify" 
+                           VerticalAlignment="Stretch"/>
+            </Button>
         </StackPanel>
     </Grid>
 </Window>

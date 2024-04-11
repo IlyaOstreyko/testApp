@@ -6,7 +6,7 @@
     <Application.Resources>
         <Style x:Key="crud_button_template" 
                TargetType="Button">
-            <Setter Property="Template">
+            <Setter Property="Template" >
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border Name="ButtonBorder" 
@@ -14,19 +14,22 @@
                                 BorderThickness="2" 
                                 BorderBrush="Black" 
                                 Background="White">
-                            <ContentPresenter Content="{TemplateBinding Content}" 
+                            <ContentPresenter Content="{TemplateBinding Content}"
                                               HorizontalAlignment="Center" 
-                                              VerticalAlignment="Center"/>
+                                              VerticalAlignment="Center"
+                                              />
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
             <Setter Property="Opacity"
-                    Value="0.6"/>
+                    Value="0.8"/>
             <Setter Property="MinHeight" 
                     Value="10"/>
             <Setter Property="MinWidth" 
                     Value="50"/>
+            <Setter Property="FontSize"
+                    Value="15"/>
             <Setter Property="FontWeight" 
                     Value="DemiBold"/>
             <Style.Triggers>
@@ -56,9 +59,11 @@
                 </Setter.Value>
             </Setter>
             <Setter Property="Opacity"
-                    Value="0.6"/>
+                    Value="0.8"/>
             <Setter Property="MinHeight" 
                     Value="10"/>
+            <Setter Property="FontSize"
+                    Value="15"/>
             <Setter Property="MinWidth" 
                     Value="50"/>
             <Setter Property="FontWeight" 
