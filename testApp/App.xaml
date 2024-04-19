@@ -29,7 +29,7 @@
             <Setter Property="MinWidth" 
                     Value="50"/>
             <Setter Property="FontSize"
-                    Value="15"/>
+                    Value="17"/>
             <Setter Property="FontWeight" 
                     Value="DemiBold"/>
             <Style.Triggers>
@@ -63,7 +63,7 @@
             <Setter Property="MinHeight" 
                     Value="10"/>
             <Setter Property="FontSize"
-                    Value="15"/>
+                    Value="17"/>
             <Setter Property="MinWidth" 
                     Value="50"/>
             <Setter Property="FontWeight" 

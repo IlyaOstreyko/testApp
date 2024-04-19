@@ -80,6 +80,8 @@
             Margin="25,5,10,5"
             Grid.Column="1" 
             Grid.Row="0" 
+            FontSize="15"
+            HorizontalAlignment="Center"
                 Text="Вопросы отвеченные неправильно:"/>
         <ScrollViewer 
             Grid.Column="1" 
@@ -87,8 +89,10 @@
             Margin="0,30,1,30">
             <ListBox 
             Grid.Column="1" 
+                FontSize="15"
             Grid.Row="2" 
-            ItemsSource="{Binding IncorrectTestQuestions}" 
+                HorizontalAlignment="Center"
+                ItemsSource="{Binding IncorrectTestQuestions}" 
             ScrollViewer.VerticalScrollBarVisibility="Auto"
             Margin="15,0,0,0">
                 <ListBox.Template>
@@ -131,6 +135,8 @@
             Margin="25,5,10,5"
             Grid.Column="1" 
             Grid.Row="2" 
+            FontSize="15"
+            HorizontalAlignment="Center"
                 Text="Вопросы отвеченные правильно:"/>
 
         <ScrollViewer 
@@ -140,6 +146,8 @@
             <ListBox 
             Grid.Column="1" 
             Grid.Row="2" 
+                HorizontalAlignment="Center"
+                FontSize="15"
             ItemsSource="{Binding CorrectTestQuestions}" 
             ScrollViewer.VerticalScrollBarVisibility="Auto"
             Margin="15,0,0,0">
@@ -180,22 +188,31 @@
                     HorizontalAlignment="Center"
                     Grid.Column="1">
             <Button IsDefault="True" 
+                    Visibility="{Binding VisibilityButtonResults, Converter={StaticResource BoolToVisibilityConverter}}"
                     Command="{Binding SaveCommand}" 
+                    Height="40"
                     Style="{StaticResource crud_button_template}"
-                    Content=" Сохранить результаты "                    
-                    HorizontalAlignment="Stretch">
+                    Content=" Сохранить отчет "                    
+                    HorizontalAlignment="Center">
             </Button>
+            
         </StackPanel>
-        <StackPanel Orientation="Horizontal" 
-                    VerticalAlignment="Center" 
+        <Button IsDefault="True"
+                Command="{Binding SaveFileCommand}" 
+                Grid.Row="3"   
+                    Grid.Column="1"
+            Height="40"
+                    Style="{StaticResource crud_button_template}"
+                    Content=" Сохранить результаты в текст "                    
+                    HorizontalAlignment="Left">
+        </Button>
+        <Button IsDefault="False" 
                     Grid.Row="3"   
-                    HorizontalAlignment="Right"
-                    Grid.Column="1">
-            <Button IsDefault="False" 
+                Margin="5"
+                    Grid.Column="1"
                     Command="{Binding CloseCommand}"
                 Style="{StaticResource close_button_template}" 
                     Content=" Завершить тест " 
                     HorizontalAlignment="Right"/>
-        </StackPanel>
     </Grid>
 </Window>

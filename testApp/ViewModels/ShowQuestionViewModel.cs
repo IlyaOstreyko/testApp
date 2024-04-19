@@ -39,6 +39,7 @@ namespace testApp.ViewModels
         private UserInfo UserInfo;
         private Answers answers;
         public bool VisibilityNameSpeciality { get; private set; } = false;
+        public bool VisibilityTest { get; private set; }
         private bool answer1;
         private bool answer2;
         private bool answer3;
@@ -170,8 +171,10 @@ namespace testApp.ViewModels
             TestQuestion = question;
         }
 
-        public ShowQuestionViewModel(List<TestQuestion> questions, UserInfo userInfo, List<Result> results)
+        public ShowQuestionViewModel(List<TestQuestion> questions, UserInfo userInfo, List<Result> results, bool isTest)
         {
+            VisibilityNameSpeciality = false;
+            VisibilityTest = isTest;
             Results = results;
             CloseWindowsCommand = new RelayCommand(CloseWindows);
             QuantityQuestion = questions.Count();
@@ -338,7 +341,7 @@ namespace testApp.ViewModels
             {
 
                 System.Windows.MessageBox.Show("Вы ответили правильно на " + mark.ToString() + " вопросов.", "Результат теста", MessageBoxButton.OK, MessageBoxImage.Information);
-                Resaults resultsWindow = new Resaults(TestQuestions, UserInfo, Results);
+                Resaults resultsWindow = new Resaults(TestQuestions, UserInfo, Results, VisibilityTest);
                 resultsWindow.ShowDialog();
             }
 

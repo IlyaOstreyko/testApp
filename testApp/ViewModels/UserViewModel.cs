@@ -1,11 +1,14 @@
-﻿using System;
+﻿using Microsoft.Office.Interop.Word;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Interop;
+using System.Windows.Shapes;
 using testApp.Forms;
 using testApp.Models;
 using testApp.Repositories;
@@ -19,7 +22,7 @@ namespace testApp.ViewModels
         private int allNumberQuestions;
         private List<TestQuestion> TestQuestions { get; set; }
         private List<Result> Results;
-
+        
         public UserInfo UserInfo
         {
             get => userInfo;
@@ -43,10 +46,25 @@ namespace testApp.ViewModels
 
         public UserViewModel(List<TestQuestion> questions, List<Result> results)
         {
+
+            
             TestQuestions = questions;
             Results = results;
+            
             AllNumberQuestions = questions.Count;
             UserInfo = new UserInfo();
+            try
+            {
+                string currentDir = Directory.GetCurrentDirectory();
+                string filename = currentDir + @"\settingsAdmin.txt";
+                List<string> lines = File.ReadAllLines(filename).ToList();
+                UserInfo.Chairman = lines[0];
+                UserInfo.PositionChairman = lines[1];
+                UserInfo.CommissionMember1 = lines[2];
+                UserInfo.PositionCommissionMember1 = lines[3];
+            }            
+            catch { }
+            UserInfo.Date = DateTime.Now.Date;
         }
 
         RelayCommand start;
@@ -65,6 +83,16 @@ namespace testApp.ViewModels
                         UserInfo.PositionCommissionMember1 != null &&
                         UserInfo.PositionUser != null)
                         {
+                            string settingsAdminForSave = UserInfo.Chairman +"\r\n";
+                            settingsAdminForSave += UserInfo.PositionChairman + "\r\n";
+                            settingsAdminForSave += UserInfo.CommissionMember1 + "\r\n";
+                            settingsAdminForSave += UserInfo.PositionCommissionMember1 + "\r\n";
+                            string currentDir = Directory.GetCurrentDirectory();
+                            string filename = currentDir + @"\settingsAdmin.txt";
+                            using (StreamWriter writer = new StreamWriter(filename, false))
+                            {
+                                writer.WriteLine(settingsAdminForSave);
+                            }
                             ShowQuestion showQuestions = new ShowQuestion(TestQuestions, UserInfo, Results);
                             showQuestions.ShowDialog();
                         }

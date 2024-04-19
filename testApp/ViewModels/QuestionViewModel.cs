@@ -95,7 +95,7 @@ namespace testApp.ViewModels
         }
         private void AdminPass(object obj)
         {
-            if (Pass == "belgosles")
+            if (Pass == "1236547")
             {
                 Visibility = true;
                 RaisePropertyChanged("Visibility");

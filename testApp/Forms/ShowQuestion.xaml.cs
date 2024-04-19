@@ -36,9 +36,22 @@ namespace testApp.Forms
         {
             //InitializeComponent();
             //DataContext = TestQuestion;
-
+            bool isTest = false;
             InitializeComponent();
-            DataContext = new ShowQuestionViewModel(testQuestions, userInfo, results);
+            DataContext = new ShowQuestionViewModel(testQuestions, userInfo, results, isTest);
+        }
+        public ShowQuestion(List<TestQuestion> testQuestions, bool isTest, List<Result> results)
+        {
+            //InitializeComponent();
+            //DataContext = TestQuestion;
+            UserInfo userInfo = new UserInfo();
+            InitializeComponent();
+            DataContext = new ShowQuestionViewModel(testQuestions, userInfo, results, isTest);
+        }
+
+        private void StackPanel_Scroll(object sender, System.Windows.Controls.Primitives.ScrollEventArgs e)
+        {
+
         }
     }
 }

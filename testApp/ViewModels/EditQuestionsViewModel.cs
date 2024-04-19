@@ -37,6 +37,7 @@ namespace testApp.ViewModels
         //public int HightRow { get; set; } = 100;
         public bool VisibilityManager { get; set; }
         public ICommand ShowQuestionsCommand { get; }
+        public ICommand ShowCommand { get; }
         public ICommand EditCommand { get; }
         public ICommand DeleteCommand { get; }
         readonly IQuestionRepository<TestQuestion> db;
@@ -45,6 +46,7 @@ namespace testApp.ViewModels
             Title = title;
             VisibilityManager = editTrue;
             ShowQuestionsCommand = new RelayCommand(ShowQuestions);
+            ShowCommand = new RelayCommand(Show);
             EditCommand = new RelayCommand(Edit);
             DeleteCommand = new RelayCommand(Delete);
             db = new QuestionRepository();
@@ -55,6 +57,18 @@ namespace testApp.ViewModels
         {
             //TestQuestions = db.GetQuestionsInTheme(SelectionTheme);
             var TestQuestionsList = db.GetQuestionsInTheme(SelectionTheme);
+            //HightRow = SelectionTheme.Count(x => x == '\n') * 50 + 100;
+            TestQuestions = new System.Collections.ObjectModel.ObservableCollection<TestQuestion>();
+            foreach (var item in TestQuestionsList)
+                TestQuestions.Add(item);
+            RaisePropertyChanged("TestQuestions");
+        }
+
+        public void Show(object obj)
+        {
+            //TestQuestions = db.GetQuestionsInTheme(SelectionTheme);
+            string theme = obj.ToString();
+            var TestQuestionsList = db.GetQuestionsInTheme(theme);
             //HightRow = SelectionTheme.Count(x => x == '\n') * 50 + 100;
             TestQuestions = new System.Collections.ObjectModel.ObservableCollection<TestQuestion>();
             foreach (var item in TestQuestionsList)

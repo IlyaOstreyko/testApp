@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title=" Тестирование сотрудников " 
         Height="450" 
-        Width="850"
+        Width="950"
         WindowStyle="None"     
         AllowsTransparency="True" 
         WindowStartupLocation="CenterScreen">
@@ -92,7 +92,7 @@
                 </Button>
             <Label  
                    Margin="10,0,10,5"
-                   Content=" ver 1.1 (01/03/2024) "  
+                   Content=" ver 1.2 (17/04/2024) "  
                    Visibility="{Binding VisibilityPass, Converter={StaticResource BoolToVisibilityConverter}}"
                    HorizontalAlignment="Center" 
                 VerticalAlignment="Center"

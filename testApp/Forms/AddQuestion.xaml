@@ -146,7 +146,7 @@
             Grid.Column="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
-                <ColumnDefinition Width="190"/>
+                <ColumnDefinition Width="140"/>
             </Grid.ColumnDefinitions>
             <ComboBox
                 Grid.Column="0"
@@ -161,7 +161,7 @@
                 IsDefault="False"                 
                     Command="{Binding AddNewThemeCommand}" 
                     Style="{StaticResource crud_button_template}"
-                    Content=" Добавить новую тему "                    
+                    Content="  Добавить &#13;новую тему "                    
                     HorizontalAlignment="Stretch">
             </Button>
         </Grid>
@@ -201,6 +201,7 @@
                     HorizontalAlignment="Left"
                     Grid.Column="2">
             <Button IsDefault="False" 
+                    Height="40"
                     Command="{Binding SaveQuestionCommand}" 
                     Style="{StaticResource crud_button_template}"
                     Content=" Сохранить "                    
@@ -214,6 +215,7 @@
                     HorizontalAlignment="Center"
                     Grid.Column="2">
             <Button IsDefault="False" 
+                    Height="40"
                     Command="{Binding AddQuestionFromFileCommand}" 
                     Style="{StaticResource crud_button_template}"
                     HorizontalAlignment="Center"
@@ -223,6 +225,7 @@
             </Button>
             <Button IsDefault="False" 
                     Command="{Binding FileCommand}" 
+                    Height="40"
                     Style="{StaticResource crud_button_template}"
                     HorizontalAlignment="Center"
                     Content=" Показать пример "
@@ -230,19 +233,14 @@
 
             </Button>
         </StackPanel>
-
-        <StackPanel Orientation="Horizontal" 
-                    VerticalAlignment="Center" 
-                    Grid.Row="11"   
-                    HorizontalAlignment="Right"
-                    Grid.Column="2">
-            <Button IsCancel="True"
+        <Button IsCancel="True"
                     IsDefault="False"
+                    Grid.Column="2"
+                    Grid.Row="11" 
                 Style="{StaticResource close_button_template}" 
-                    Margin ="10"
+                    Margin ="5"
                     Content=" Отмена " 
                     HorizontalAlignment="Right"/>
-        </StackPanel>
 
         <StackPanel Orientation="Horizontal"
                     HorizontalAlignment="Center"
@@ -250,6 +248,7 @@
                     Grid.Row="9" Grid.Column="1" >
             <Button x:Name="Button_Add_Image" 
                     IsDefault="False"
+                    Height="30"
                     Command="{Binding AddImageCommand}" 
                     Style="{StaticResource crud_button_template}"
                     Content="{Binding TitleImageButton}"></Button>

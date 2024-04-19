@@ -21,10 +21,10 @@ namespace testApp.Forms
     /// </summary>
     public partial class Resaults : Window
     {
-        public Resaults(List<TestQuestion> testQuestions, UserInfo userInfo, List<Result> results)
+        public Resaults(List<TestQuestion> testQuestions, UserInfo userInfo, List<Result> results, bool isTest)
         {
             InitializeComponent();
-            DataContext = new ResaultsViewModel(testQuestions, userInfo, results);
+            DataContext = new ResaultsViewModel(testQuestions, userInfo, results, isTest);
         }
     }
 }

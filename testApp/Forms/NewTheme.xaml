@@ -85,6 +85,7 @@
                      Style="{StaticResource crud_button_template}"
                     Click="Accept_Click"
                     MinWidth="60" 
+                    Height="30"
                     Margin="0,0,10,0">OK</Button>
             <Button IsCancel="True" 
                     Style="{StaticResource close_button_template}"

@@ -89,9 +89,9 @@
             <TextBlock 
                 Grid.Row="0"
                 HorizontalAlignment="Center"
-                FontSize="15"
+                FontSize="16"
                 Margin="10,5,10,0"
-                Text="Выберите тему"/>
+                Text="Выберите тему:"/>
             <!--<ComboBox 
                 Grid.Row="1"
                 ItemsSource="{Binding Path=Themes}"
@@ -119,17 +119,16 @@
                 </ListBox.Template>
                 <ListBox.ItemTemplate >
                     <DataTemplate>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="auto">
-                                <Border HorizontalAlignment="Center">
-                                    <Button IsDefault="False" 
-                                    
-                                Command="{Binding DataContext.EditCommand,RelativeSource={RelativeSource AncestorType=Window, AncestorLevel=1}}"                                
-                                CommandParameter="{Binding}"
-                                Style="{StaticResource crud_button_template}"                                
-                                HorizontalAlignment="Stretch"
-                                Content="{Binding}"/>
-                                    </Border>
-                                    <!--<CheckBox IsChecked="{Binding Tag}"/>-->
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Button IsDefault="False" 
+                                        Command="{Binding DataContext.ShowCommand,RelativeSource={RelativeSource AncestorType=Window, AncestorLevel=1}}"                                
+                                        CommandParameter="{Binding}"
+                                        Style="{StaticResource crud_button_template}"  
+                                        Width="Auto"
+                                        HorizontalAlignment="Stretch"
+                                        Content="{Binding}"/>
+                                
+                                <!--<CheckBox IsChecked="{Binding Tag}"/>-->
                             <!--<RadioButton 
                 Grid.Row="1"
                 GroupName="GroundUpper" 
@@ -158,6 +157,9 @@
             <ListBox 
             Grid.Column="1" 
             Grid.Row="2" 
+                FontSize="16"
+                HorizontalAlignment="Stretch"
+                HorizontalContentAlignment="Stretch"
             ItemsSource="{Binding TestQuestions, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
             ScrollViewer.VerticalScrollBarVisibility="Auto"
             Margin="15,0,0,0">
@@ -177,7 +179,7 @@
                 </ListBox.Template>
                 <ListBox.ItemTemplate >
                     <DataTemplate>
-                        <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                             <Image Source="{Binding FullImageQuestion, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                                    AllowDrop="True" 
                                    Width="450"
@@ -234,7 +236,7 @@
                 Content=" Закрыть " 
                 Grid.Column="1"
                 Grid.Row="3"
-                Margin ="10"
+                Margin ="5"
                 HorizontalAlignment="Right"/>
     </Grid>
 </Window>

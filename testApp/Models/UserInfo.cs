@@ -17,6 +17,7 @@ namespace testApp.Models
         private string commissionMember1 { get; set; }
         private string positionCommissionMember1 { get; set; }
         private int numberMistake { get; set; }
+        private DateTime date { get; set; }
 
         public string User
         {
@@ -86,6 +87,15 @@ namespace testApp.Models
             }
         }
 
+        public DateTime Date
+        {
+            get { return date; }
+            set
+            {
+                date = value;
+                OnPropertyChanged("Date");
+            }
+        }
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {
