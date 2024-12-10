@@ -73,6 +73,7 @@
             Margin="25,5,10,5"
             Grid.Column="1" 
             Grid.Row="0" 
+            HorizontalAlignment="Center"
             IsReadOnly="True"
             BorderThickness="0"
             Background="Transparent"
